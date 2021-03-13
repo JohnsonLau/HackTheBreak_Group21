@@ -1,11 +1,16 @@
 const express = require('express');
 const path = require('path');
+const ejsLayouts = require('express-ejs-layouts');
+let ejs = require('ejs');
 
 app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(ejsLayouts);
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.send('Hack the break');
+  res.render('schedule/index');
 });
 
 const port = process.env.PORT || 8080;
